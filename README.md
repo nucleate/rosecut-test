@@ -67,6 +67,15 @@ Start your DynamoDB instance locally using Docker:
 docker-compose -f ./docker/docker-compose.yml up
 ```
 
+Specify database region and Docker host in your env.json. Example:
+
+```sh
+{
+  "AWS_REGION": "local",
+  "DB_ENDPOINT": "http://docker.for.mac.localhost:8000"
+}
+```
+
 Build your application by using the `sam build` command.
 
 ```bash
@@ -80,8 +89,8 @@ Test a single function by invoking it directly with a test event. An event is a 
 Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
-my-application$ sam local invoke putItemFunction --event events/event-post-item.json
-my-application$ sam local invoke getAllItemsFunction --event events/event-get-all-items.json
+my-application$ sam local invoke createUserFunction --event events/event-create-user.json --env-vars=env.json
+my-application$ sam local invoke getAllUsersFunction --event events/event-get-all-users.json --env-vars=env.json
 ```
 
 The AWS SAM CLI can also emulate your application's API. Use the `sam local start-api` command to run the API locally on port 3000.
@@ -112,10 +121,10 @@ Update `template.yaml` to add a dead-letter queue to your application. In the **
 Resources:
   MyQueue:
     Type: AWS::SQS::Queue
-  getAllItemsFunction:
+  getAllUsersFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/get-all-items.getAllItemsHandler
+      Handler: dist/handlers/get-all-items.getAllItemsHandler
       Runtime: nodejs14.x
       DeadLetterQueue:
         Type: SQS
@@ -142,7 +151,7 @@ To simplify troubleshooting, the AWS SAM CLI has a command called `sam logs`. `s
 **NOTE:** This command works for all Lambda functions, not just the ones you deploy using AWS SAM.
 
 ```bash
-my-application$ sam logs -n putItemFunction --stack-name sam-app --tail
+my-application$ sam logs -n createUserFunction --stack-name sam-app --tail
 ```
 
 **NOTE:** This uses the logical name of the function within the stack. This is the correct name to use when searching logs inside an AWS Lambda function within a CloudFormation stack, even if the deployed function name varies due to CloudFormation's unique resource name generation.

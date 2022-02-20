@@ -1,0 +1,4 @@
+{
+  "httpMethod": "POST",
+  "body": "{\"id\":\"9bd7ac3a-3b5e-43ae-a426-7dc1cbd9634b\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"middleName\":\"\",\"phoneNumber\":12345645,\"dateOfBirth\":\"Sun Feb 20 2022 13:06:18 GMT+0300 (Moscow Standard Time)\",\"email\":\"test@test.com\",\"gender\":\"male\",\"addressLine1\":\"\",\"addressType\":\"home\",\"city\":\"string\",\"counry\":\"string\",\"postcode\":\"string\",\"nationality\":\"string\"}"
+}
