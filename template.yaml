@@ -14,6 +14,8 @@ Transform:
 
 Globals:
   Function:
+    Layers:
+        - !Ref RuntimeDependenciesLayer
     Environment:
       Variables:
         USER_TABLE: !Ref UserTable
@@ -34,6 +36,8 @@ Resources:
   # This is a Lambda function config associated with the source code: get-all-items.js
   getAllUsersFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
     Properties:
       Handler: dist/handlers/get-all-users.getAllUsersHandler
       Description: A simple example includes a HTTP get method to get all items from a DynamoDB table.
@@ -52,6 +56,8 @@ Resources:
 
   # This is a Lambda function config associated with the source code: get-user.ts
   getUserFunction:
+    Metadata:
+        BuildMethod: makefile
     Type: AWS::Serverless::Function
     Properties:
       Handler: dist/handlers/get-user.getUserHandler
@@ -72,6 +78,8 @@ Resources:
   # This is a Lambda function config associated with the source code: create-user.ts
   createUserFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
     Properties:
       Handler: dist/handlers/create-user.createUserHandler
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
@@ -91,6 +99,8 @@ Resources:
 # This is a Lambda function config associated with the source code: create-user.ts
   updateUserFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
     Properties:
       Handler: dist/handlers/update-user.updateUserHandler
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
@@ -111,6 +121,8 @@ Resources:
 # This is a Lambda function config associated with the source code: delete-user.ts
   deleteUserFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
     Properties:
       Handler: dist/handlers/delete-user.deleteUserHandler
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
@@ -137,6 +149,17 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 2
         WriteCapacityUnits: 2
+
+  RuntimeDependenciesLayer:
+      Type: AWS::Serverless::LayerVersion
+      Metadata:
+        BuildMethod: makefile
+      Properties:
+        Description: Runtime dependencies for Lambdas
+        ContentUri: ./
+        CompatibleRuntimes:
+          - nodejs14.x
+        RetentionPolicy: Retain
 
 Outputs:
   WebEndpoint:
