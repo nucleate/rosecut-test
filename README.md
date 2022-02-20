@@ -26,6 +26,16 @@ To get started, see the following:
 - [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
 - [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
 
+## User Web API methods description
+
+| Method | Path  | Description          |
+| :----- | :---- | :------------------- |
+| GET    | /{id} | Get user by id       |
+| GET    | /     | Get all users        |
+| POST   | /     | Create new user      |
+| PUT    | /{id} | Update existing user |
+| DELETE | /     | Delete user by id    |
+
 ## Deploy the sample application
 
 The AWS SAM CLI is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
