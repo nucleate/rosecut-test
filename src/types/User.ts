@@ -1,4 +1,4 @@
-export type User = {
+export interface IUser {
     id: string;
     firstName: string;
     middleName?: string;
@@ -6,15 +6,15 @@ export type User = {
     phone: number;
     dateOfBirth: Date;
     email: string;
-    gender?: string;
+    gender?: UserGender;
     addressLine1: string;
     addressLine2?: string;
     addressType?: string;
     city: string;
     state?: string;
-    counry: string;
+    country: string;
     postcode: string;
-    maritalStatus?: string;
+    maritalStatus?: UserMaritalStatus;
     nationality: string;
     nino?: string;
     utr?: string;

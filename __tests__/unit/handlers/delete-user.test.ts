@@ -2,6 +2,7 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 import { buildAPIGatewayEvent } from '../../utils/builder';
 import { deleteUserHandler } from '../../../src/handlers/delete-user'
+import { ResponseCode } from '../../../src/constants/responseCodes';
 
 describe('Test delete user', () => {
     let deleteSpy;
@@ -31,6 +32,6 @@ describe('Test delete user', () => {
         const result = await deleteUserHandler(event);
 
         expect(deleteSpy).toHaveBeenCalled();
-        expect(result.statusCode).toEqual(200);
+        expect(result.statusCode).toEqual(ResponseCode.OK);
     });
 }); 

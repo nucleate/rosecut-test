@@ -2,6 +2,7 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 import { buildAPIGatewayEvent } from '../../utils/builder';
 import { getAllUsersHandler } from '../../../src/handlers/get-all-users'
+import { ResponseCode } from '../../../src/constants/responseCodes';
 
 describe('Test get all users', () => {
     let scanSpy;
@@ -26,7 +27,7 @@ describe('Test get all users', () => {
         const result = await getAllUsersHandler(event);
 
         const expectedResult = {
-            statusCode: 200,
+            statusCode: ResponseCode.OK,
             body: JSON.stringify(users)
         };
 

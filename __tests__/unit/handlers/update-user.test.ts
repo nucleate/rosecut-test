@@ -2,7 +2,8 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 import { buildAPIGatewayEvent } from '../../utils/builder';
 import { updateUserHandler } from '../../../src/handlers/update-user'
-import { User } from '../../../src/types/User';
+import { IUser } from '../../../src/types/User';
+import { ResponseCode } from '../../../src/constants/responseCodes';
 
 describe('Test update user', () => {
     let putSpy;
@@ -16,7 +17,7 @@ describe('Test update user', () => {
     });
 
     it('Should update existing user', async () => {
-        const user: Partial<User> = { id: 'id1', firstName: 'John', lastName: 'Does' };
+        const user: Partial<IUser> = { id: 'id1', firstName: 'John', lastName: 'Does', email: 'john@test.com', postcode: 'CW3 9SS' };
 
         putSpy.mockReturnValue({
             promise: () => Promise.resolve(user)
@@ -32,7 +33,7 @@ describe('Test update user', () => {
         const result = await updateUserHandler(event);
 
         const expectedResult = {
-            statusCode: 200,
+            statusCode: ResponseCode.OK,
             body: JSON.stringify(user)
         };
 

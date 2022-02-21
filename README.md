@@ -34,7 +34,7 @@ To get started, see the following:
 | GET    | /     | Get all users        |
 | POST   | /     | Create new user      |
 | PUT    | /{id} | Update existing user |
-| DELETE | /     | Delete user by id    |
+| DELETE | /{id} | Delete user by id    |
 
 ## Deploy the sample application
 

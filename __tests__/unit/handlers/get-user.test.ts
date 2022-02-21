@@ -2,6 +2,7 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 import { buildAPIGatewayEvent } from '../../utils/builder';
 import { getUserHandler } from '../../../src/handlers/get-user'
+import { ResponseCode } from '../../../src/constants/responseCodes';
 
 describe('Test get user', () => {
     let getSpy;
@@ -31,7 +32,7 @@ describe('Test get user', () => {
         const result = await getUserHandler(event);
 
         const expectedResult = {
-            statusCode: 200,
+            statusCode: ResponseCode.OK,
             body: JSON.stringify(user)
         };
 
